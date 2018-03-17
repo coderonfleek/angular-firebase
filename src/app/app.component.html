@@ -11,7 +11,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Angular Mock Back End</a>
+          <a class="navbar-brand" href="#">Angular Firestore</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -40,7 +40,7 @@
         </p>
 
         <div class="form-group">
-          <button class="btn btn-primary" [disabled]="!f.valid">
+          <button class="btn btn-primary" [disabled]="!f.valid" (click)="saveTask()">
             Save Task
           </button>
         </div>
@@ -53,15 +53,15 @@
           <th>Task</th>
           <th></th>
         </tr>
-        <tr>
-          <td>1</td>
-          <td>A Task</td>
+        <tr *ngFor="let task of tasks | async; let i = index" [attr.data-index]="i">
+          <td>{{i + 1}}</td>
+          <td>{{task.description}}</td>
           <td>
-            <button class="btn btn-success">
+            <button class="btn btn-success" (click)="edit(task)">
               <i class="fa fa-edit"></i>
             </button>
 
-            <button class="btn btn-danger">
+            <button class="btn btn-danger" (click)="deleteTask(task)">
               <i class="fa fa-remove"></i>
             </button>
           </td>
